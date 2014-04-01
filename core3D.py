@@ -235,6 +235,9 @@ for i in range(n_axial+2):
             tmp.append(random.uniform(hzp_fueltemp, high_fueltemp))
         fuel_temp_str += fuel_temp.format(*tmp)
 
-print accel_str
-print dens_str
-print fuel_temp_str
+dz = (taf - baf)/float(n_axial)
+top = taf + dz
+bot = baf - dz
+
+with open('cmfd.xml','w') as fh:
+    fh.write(cmfd_str.format(bot=bot, top=top, n_axial=n_axial+2, accel_map = accel_str, fuel_temp=fuel_temp_str, density=dens_str))
